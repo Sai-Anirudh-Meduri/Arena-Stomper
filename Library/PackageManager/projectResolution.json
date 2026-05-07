@@ -9,6 +9,16 @@
     "/Applications/Unity/Hub/Editor/6000.3.14f1/Unity.app/Contents/Resources/PackageManager/BuiltInPackages/BuiltInPackagesCombined.sha1"
   ],
   "outputs": {
+    "com.unity.cinemachine@3.1.6": {
+      "name": "com.unity.cinemachine",
+      "displayName": "Cinemachine",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.cinemachine@285f38545487",
+      "fingerprint": "285f385454873b7d4509f804a9b4c840e834066a",
+      "editorCompatibility": "2022.3.0a1",
+      "version": "3.1.6",
+      "source": "registry",
+      "testable": false
+    },
     "com.unity.multiplayer.center@1.0.1": {
       "name": "com.unity.multiplayer.center",
       "displayName": "Multiplayer Center",
@@ -16,6 +26,36 @@
       "fingerprint": "f01f4ba8d00afa4e957bddf0fcd1612a564401ff",
       "editorCompatibility": "6000.0.0a1",
       "version": "1.0.1",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.postprocessing@3.5.4": {
+      "name": "com.unity.postprocessing",
+      "displayName": "Post Processing",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.postprocessing@141166b789e3",
+      "fingerprint": "141166b789e3df4d2a816ea0dc441d73da8db3e6",
+      "editorCompatibility": "2019.4.19f1",
+      "version": "3.5.4",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.probuilder@6.0.9": {
+      "name": "com.unity.probuilder",
+      "displayName": "ProBuilder",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.probuilder@1f279ab829b7",
+      "fingerprint": "1f279ab829b7ed3bbe362a4beda666724eacffbf",
+      "editorCompatibility": "6000.0.0a1",
+      "version": "6.0.9",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.ugui@2.0.0": {
+      "name": "com.unity.ugui",
+      "displayName": "uGUI",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.ugui@8ccc29d23a79",
+      "fingerprint": "8ccc29d23a79b6785b16aa5c071a632b8148cd58",
+      "editorCompatibility": "2019.2.0a1",
+      "version": "2.0.0",
       "source": "builtin",
       "testable": false
     },
@@ -304,6 +344,126 @@
       "displayName": "Hierarchy Core",
       "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.modules.hierarchycore",
       "version": "1.0.0",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.shadergraph@17.3.0": {
+      "name": "com.unity.shadergraph",
+      "displayName": "Shader Graph",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.shadergraph@28ee1cc75774",
+      "fingerprint": "28ee1cc75774260e8b39e81c87cfd078fb0aea15",
+      "editorCompatibility": "6000.3.0a1",
+      "version": "17.3.0",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.settings-manager@2.1.1": {
+      "name": "com.unity.settings-manager",
+      "displayName": "Settings Manager",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.settings-manager@0b8638c5ce86",
+      "fingerprint": "0b8638c5ce86009d785da17b17aaf629047f64ce",
+      "editorCompatibility": "2022.3.0a1",
+      "version": "2.1.1",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.splines@2.8.4": {
+      "name": "com.unity.splines",
+      "displayName": "Splines",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.splines@9b00833aca09",
+      "fingerprint": "9b00833aca0985d4922f2ab7d852ca036cd3345c",
+      "editorCompatibility": "2022.3.0a1",
+      "version": "2.8.4",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.render-pipelines.core@17.3.0": {
+      "name": "com.unity.render-pipelines.core",
+      "displayName": "Scriptable Render Pipeline Core",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.render-pipelines.core@02dfbe8e43de",
+      "fingerprint": "02dfbe8e43defa81e3dcf190306217158eee0a92",
+      "editorCompatibility": "6000.3.0a1",
+      "version": "17.3.0",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.searcher@4.9.4": {
+      "name": "com.unity.searcher",
+      "displayName": "Searcher",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.searcher@d45a78918735",
+      "fingerprint": "d45a78918735dd5b1de2247c6e3567c60aa24115",
+      "editorCompatibility": "2019.1.0a1",
+      "version": "4.9.4",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.mathematics@1.3.3": {
+      "name": "com.unity.mathematics",
+      "displayName": "Mathematics",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.mathematics@19a9377c4ffa",
+      "fingerprint": "19a9377c4ffa59370edad3e6a34e4445529badde",
+      "editorCompatibility": "2021.3.0a1",
+      "version": "1.3.3",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.burst@1.8.29": {
+      "name": "com.unity.burst",
+      "displayName": "Burst",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.burst@6bb9aca3ef38",
+      "fingerprint": "6bb9aca3ef382e98bd0c1e4ab5fc74380c16095f",
+      "editorCompatibility": "2022.3.0a1",
+      "version": "1.8.29",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.collections@2.6.5": {
+      "name": "com.unity.collections",
+      "displayName": "Collections",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.collections@12999e356c23",
+      "fingerprint": "12999e356c23ff259c1818d8c92b464bca5037df",
+      "editorCompatibility": "2022.3.20f1",
+      "version": "2.6.5",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.test-framework@1.6.0": {
+      "name": "com.unity.test-framework",
+      "displayName": "Test Framework",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.test-framework@aebcb98460c6",
+      "fingerprint": "aebcb98460c6bace03eba5166f374975b3b0bb18",
+      "editorCompatibility": "6000.0.44f1",
+      "version": "1.6.0",
+      "source": "builtin",
+      "testable": false
+    },
+    "com.unity.nuget.mono-cecil@1.11.6": {
+      "name": "com.unity.nuget.mono-cecil",
+      "displayName": "Mono Cecil",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.nuget.mono-cecil@ecb9724e46ff",
+      "fingerprint": "ecb9724e46fff855c46a4f37f0a3377a3cfffc06",
+      "editorCompatibility": "2019.4.0a1",
+      "version": "1.11.6",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.test-framework.performance@3.4.0": {
+      "name": "com.unity.test-framework.performance",
+      "displayName": "Performance testing API",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.test-framework.performance@aa81a99c4a75",
+      "fingerprint": "aa81a99c4a7555f330ebbe4671ce42b8c93c2448",
+      "editorCompatibility": "2020.3.0a1",
+      "version": "3.4.0",
+      "source": "registry",
+      "testable": false
+    },
+    "com.unity.ext.nunit@2.0.5": {
+      "name": "com.unity.ext.nunit",
+      "displayName": "Custom NUnit",
+      "resolvedPath": "/Users/saianirudh/Documents/GitHub/Arena-Stomper/Library/PackageCache/com.unity.ext.nunit@d8c07649098d",
+      "fingerprint": "d8c07649098d3936da4c8ab500960c1776b44592",
+      "editorCompatibility": "2019.4.0a1",
+      "version": "2.0.5",
       "source": "builtin",
       "testable": false
     }
