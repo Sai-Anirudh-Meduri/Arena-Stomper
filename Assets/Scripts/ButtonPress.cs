@@ -1,16 +1,30 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonPress : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // Function to load a scene by name
+    public void LoadSceneByName(string sceneName)
     {
-        
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(sceneName);
     }
 
-    // Update is called once per frame
-    void Update()
+    // Function to load the next scene in the build order
+    public void LoadNextScene()
     {
-        
+        Time.timeScale = 1f;
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex + 1);
+    }
+
+    // Function to quit the game
+    public void QuitGame()
+    {
+        Application.Quit();
+
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #endif
     }
 }
