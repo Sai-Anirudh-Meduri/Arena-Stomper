@@ -7,8 +7,9 @@ public class WolfBossAI : MonoBehaviour
     public Transform player;
 
     [Header("Distance Settings")]
-    public float walkRange = 6f;
-    public float attackRange = 3f;
+    public float detectionRange = 100f;
+    public float runRange = 10f;
+    public float attackRange = 5f;
 
     [Header("Movement Settings")]
     public float walkSpeed = 2f;
@@ -34,6 +35,7 @@ public class WolfBossAI : MonoBehaviour
         animator = GetComponent<Animator>();
 
         agent.stoppingDistance = attackRange;
+        agent.autoBraking = true;
 
         if (player == null)
         {
@@ -48,26 +50,8 @@ public class WolfBossAI : MonoBehaviour
 
     void Update()
     {
-        if (player == null || isDead || isStunned)
+        if (player == null || isDead)
             return;
-
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        // Attack when very close
-        if (distanceToPlayer <= attackRange)
-        {
-            AttackPlayer();
-        }
-        // Walk when somewhat close
-        else if (distanceToPlayer <= walkRange)
-        {
-            WalkToPlayer();
-        }
-        // Run when far away
-        else
-        {
-            RunToPlayer();
-        }
 
         attackTimer -= Time.deltaTime;
 
@@ -75,12 +59,36 @@ public class WolfBossAI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.G))
         {
             GotHit();
+            return;
         }
 
         // Test death animation with H. Delete after testing.
         if (Input.GetKeyDown(KeyCode.H))
         {
             Die();
+            return;
+        }
+
+        if (isStunned)
+            return;
+
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+
+        if (distanceToPlayer <= attackRange)
+        {
+            AttackPlayer();
+        }
+        else if (distanceToPlayer <= runRange)
+        {
+            RunToPlayer();
+        }
+        else if (distanceToPlayer <= detectionRange)
+        {
+            WalkToPlayer();
+        }
+        else
+        {
+            Idle();
         }
     }
 
@@ -88,6 +96,7 @@ public class WolfBossAI : MonoBehaviour
     {
         agent.isStopped = false;
         agent.speed = walkSpeed;
+        agent.stoppingDistance = attackRange;
         agent.SetDestination(player.position);
 
         animator.SetBool("Walk", true);
@@ -98,6 +107,7 @@ public class WolfBossAI : MonoBehaviour
     {
         agent.isStopped = false;
         agent.speed = runSpeed;
+        agent.stoppingDistance = attackRange;
         agent.SetDestination(player.position);
 
         animator.SetBool("Walk", false);
@@ -107,6 +117,7 @@ public class WolfBossAI : MonoBehaviour
     void AttackPlayer()
     {
         agent.isStopped = true;
+        agent.ResetPath();
 
         animator.SetBool("Walk", false);
         animator.SetBool("Run", false);
@@ -130,17 +141,27 @@ public class WolfBossAI : MonoBehaviour
         }
     }
 
+    void Idle()
+    {
+        agent.isStopped = true;
+        agent.ResetPath();
+
+        animator.SetBool("Walk", false);
+        animator.SetBool("Run", false);
+    }
+
     void GotHit()
     {
         if (isDead)
             return;
 
         isStunned = true;
+
         agent.isStopped = true;
+        agent.ResetPath();
 
         animator.SetBool("Walk", false);
         animator.SetBool("Run", false);
-
         animator.SetTrigger("GotHit");
 
         Invoke(nameof(EndStun), hitStunTime);
@@ -148,7 +169,11 @@ public class WolfBossAI : MonoBehaviour
 
     void EndStun()
     {
+        if (isDead)
+            return;
+
         isStunned = false;
+        agent.isStopped = false;
     }
 
     void Die()
@@ -157,11 +182,12 @@ public class WolfBossAI : MonoBehaviour
             return;
 
         isDead = true;
+
         agent.isStopped = true;
+        agent.ResetPath();
 
         animator.SetBool("Walk", false);
         animator.SetBool("Run", false);
-
         animator.SetTrigger("Die");
     }
 
