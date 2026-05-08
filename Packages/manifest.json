@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.unity.ai.navigation": "2.0.12",
     "com.unity.cinemachine": "3.1.6",
     "com.unity.multiplayer.center": "1.0.1",
     "com.unity.postprocessing": "3.5.4",
