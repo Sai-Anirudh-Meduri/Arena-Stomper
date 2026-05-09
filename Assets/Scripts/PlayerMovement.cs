@@ -17,6 +17,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float attackRange = 2.5f;
     [SerializeField] private LayerMask enemyLayer;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip swordClangSound;
+
     private CharacterController controller;
     private Animator animator;
 
@@ -166,6 +170,14 @@ public class PlayerMovement : MonoBehaviour
                 wolfBossHealth.TakeDamage(playerAttackDamage);
                 break;
             }
+        }
+    }
+
+    public void PlaySwordSound()
+    {
+        if (audioSource != null && swordClangSound != null)
+        {
+            audioSource.PlayOneShot(swordClangSound);
         }
     }
 }
