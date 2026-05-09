@@ -18,6 +18,13 @@ public class WolfBossAI : MonoBehaviour
 
     [Header("Attack Settings")]
     public float attackCooldown = 2f;
+    [SerializeField] private float attackHitDelay = 0.6f;
+
+    [Header("Wolf Damage")]
+    [SerializeField] private Transform attackPoint;
+    [SerializeField] private float attack1Damage = 15f;
+    [SerializeField] private float attack2Damage = 25f;
+    [SerializeField] private float damageRange = 5f;
 
     [Header("Hit Settings")]
     public float hitStunTime = 1f;
@@ -46,6 +53,11 @@ public class WolfBossAI : MonoBehaviour
                 player = foundPlayer.transform;
             }
         }
+
+        if (attackPoint == null)
+        {
+            attackPoint = transform;
+        }
     }
 
     void Update()
@@ -54,20 +66,6 @@ public class WolfBossAI : MonoBehaviour
             return;
 
         attackTimer -= Time.deltaTime;
-
-        // Test got hit animation with G. Delete after testing.
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            GotHit();
-            return;
-        }
-
-        // Test death animation with H. Delete after testing.
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            Die();
-            return;
-        }
 
         if (isStunned)
             return;
@@ -131,13 +129,31 @@ public class WolfBossAI : MonoBehaviour
             if (randomAttack == 1)
             {
                 animator.SetTrigger("Attack1");
+                Invoke(nameof(Attack1Damage), attackHitDelay);
             }
             else
             {
                 animator.SetTrigger("Attack2");
+                Invoke(nameof(Attack2Damage), attackHitDelay);
             }
 
             attackTimer = attackCooldown;
+        }
+    }
+
+    void Attack1Damage()
+    {
+        if (!isDead && !isStunned)
+        {
+            DealDamageToPlayer(attack1Damage);
+        }
+    }
+
+    void Attack2Damage()
+    {
+        if (!isDead && !isStunned)
+        {
+            DealDamageToPlayer(attack2Damage);
         }
     }
 
@@ -206,5 +222,20 @@ public class WolfBossAI : MonoBehaviour
             targetRotation,
             rotationSpeed * Time.deltaTime
         );
+    }
+
+    void DealDamageToPlayer(float damage)
+    {
+        float distanceToPlayer = Vector3.Distance(attackPoint.position, player.position);
+
+        if (distanceToPlayer <= damageRange)
+        {
+            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+
+            if (playerHealth != null)
+            {
+                playerHealth.TakeDamage(damage);
+            }
+        }
     }
 }

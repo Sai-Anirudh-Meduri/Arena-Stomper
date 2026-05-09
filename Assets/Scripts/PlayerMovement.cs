@@ -12,6 +12,11 @@ public class PlayerMovement : MonoBehaviour
     [Header("Combat Settings")]
     public float attackDuration = 1f;
 
+    [Header("Player Combat")]
+    [SerializeField] private float playerAttackDamage = 25f;
+    [SerializeField] private float attackRange = 2.5f;
+    [SerializeField] private LayerMask enemyLayer;
+
     private CharacterController controller;
     private Animator animator;
 
@@ -24,12 +29,18 @@ public class PlayerMovement : MonoBehaviour
         controller = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
 
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        if (Time.timeScale != 0f)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 
     void Update()
     {
+        if (Time.timeScale == 0f)
+            return;
+
         MovePlayer();
         HandleAnimations();
     }
@@ -43,14 +54,13 @@ public class PlayerMovement : MonoBehaviour
             velocity.y = -2f;
         }
 
-        // Mouse rotation
         float mouseX = Input.GetAxis("Mouse X");
-
-        // Do NOT multiply mouse rotation by Time.deltaTime here
         transform.Rotate(Vector3.up * mouseX * rotationSpeed);
 
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        Vector2 input = GetMovementInput();
+
+        float horizontal = input.x;
+        float vertical = input.y;
 
         Vector3 move = transform.right * horizontal + transform.forward * vertical;
 
@@ -71,15 +81,16 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleAnimations()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        Vector2 input = GetMovementInput();
+
+        float horizontal = input.x;
+        float vertical = input.y;
 
         bool isMoving = Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f;
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
 
         animator.SetBool("Walk", isMoving);
         animator.SetBool("Run", isMoving && isRunning);
-
         animator.SetBool("Block", Input.GetKey(KeyCode.Q));
 
         if (Input.GetMouseButtonDown(0) && !isAttacking)
@@ -88,10 +99,39 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    Vector2 GetMovementInput()
+    {
+        int controlScheme = PlayerPrefs.GetInt("ControlScheme", 0);
+
+        float horizontal = 0f;
+        float vertical = 0f;
+
+        if (controlScheme == 0)
+        {
+            // WASD controls
+            if (Input.GetKey(KeyCode.A)) horizontal = -1f;
+            if (Input.GetKey(KeyCode.D)) horizontal = 1f;
+            if (Input.GetKey(KeyCode.W)) vertical = 1f;
+            if (Input.GetKey(KeyCode.S)) vertical = -1f;
+        }
+        else
+        {
+            // Arrow key controls
+            if (Input.GetKey(KeyCode.LeftArrow)) horizontal = -1f;
+            if (Input.GetKey(KeyCode.RightArrow)) horizontal = 1f;
+            if (Input.GetKey(KeyCode.UpArrow)) vertical = 1f;
+            if (Input.GetKey(KeyCode.DownArrow)) vertical = -1f;
+        }
+
+        return new Vector2(horizontal, vertical).normalized;
+    }
+
     void StartAttack()
     {
         isAttacking = true;
         animator.SetTrigger("Attack");
+
+        DealDamageToWolf();
 
         Invoke(nameof(EndAttack), attackDuration);
     }
@@ -99,5 +139,33 @@ public class PlayerMovement : MonoBehaviour
     void EndAttack()
     {
         isAttacking = false;
+    }
+
+    public bool IsBlocking()
+    {
+        return Input.GetKey(KeyCode.Q);
+    }
+
+    void DealDamageToWolf()
+    {
+        Collider[] hits = Physics.OverlapSphere(
+            transform.position + transform.forward * 1.5f,
+            attackRange,
+            enemyLayer
+        );
+
+        Debug.Log("Player attack hit count: " + hits.Length);
+
+        foreach (Collider hit in hits)
+        {
+            WolfBossHealth wolfBossHealth = hit.GetComponentInParent<WolfBossHealth>();
+
+            if (wolfBossHealth != null)
+            {
+                Debug.Log("Player hit wolf!");
+                wolfBossHealth.TakeDamage(playerAttackDamage);
+                break;
+            }
+        }
     }
 }
